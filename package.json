@@ -1,0 +1,19 @@
+{
+  "name": "com.haerphi.com.haerphi.githubpackagemanager",
+  "version": "1.0.0",
+  "displayName": "Github package manager",
+  "description": "This is a little manager to help you with your github packages",
+  "unity": "2020.3",
+  "documentationUrl": "https://github.com/haerphi/unity-github-package-manager",
+  "keywords": [
+    "github",
+    "package",
+    "manager"
+  ],
+  "author": {
+    "name": "Haerphi",
+    "email": "haerphi@gmail.com",
+    "url": "https://www.haerphi.be"
+  },
+  "unityRelease": "27f1"
+}

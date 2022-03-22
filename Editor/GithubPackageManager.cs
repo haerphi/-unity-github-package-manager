@@ -287,11 +287,20 @@ public class GithubPackageManager : EditorWindow
 
         using (StreamWriter outputFile = new StreamWriter(Path.Combine(Application.dataPath + "/githubManager", "Packages.json")))
         {
-            outputFile.WriteLine("[");
-            for (int i = 0; i < githubDependencies.Count; i++)
+            List<String> el = new List<string>();
+            foreach (GithubPackage gp in githubDependencies)
             {
-                outputFile.WriteLine(githubDependencies[i].ToString());
-                if (i + 1 < githubDependencies.Count)
+                if (gp.onRelease != null)
+                {
+                    el.Add(gp.ToString());
+                }
+            }
+
+            outputFile.WriteLine("[");
+            for (int i = 0; i < el.Count; i++)
+            {
+                outputFile.WriteLine(el[i]);
+                if (i + 1 < el.Count)
                 {
                     outputFile.WriteLine(",");
                 }

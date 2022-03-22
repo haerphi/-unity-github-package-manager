@@ -24,7 +24,6 @@ public class GithubPackageManager : EditorWindow
     private string gitTokenField;
     private string gitToken;
     private string packageUrl = "https://";
-    private bool autoCheckUpdate = false;
     private string packageListStatus = "Fetch first please";
     private List<GithubPackage> githubDependencies = new List<GithubPackage>();
     private GithubApiHelper gah = new GithubApiHelper();
@@ -51,7 +50,6 @@ public class GithubPackageManager : EditorWindow
         UnityEngine.Debug.Log("RESET!");
         EventSubscribingExample_RegisteringPackages();
         packageUrl = "https://";
-        autoCheckUpdate = false;
         packageListStatus = "Fetch first please";
         githubDependencies = new List<GithubPackage>();
         gahHash = gah.GetHashCode();
@@ -75,23 +73,20 @@ public class GithubPackageManager : EditorWindow
         }
         EditorGUILayout.Space();
 
-        GUILayout.Label("Add new package", EditorStyles.boldLabel);
-        packageUrl = EditorGUILayout.TextField("Git url", packageUrl);
-        if (GUILayout.Button("Add package from url"))
-        {
-            this.AddPackageFromUrl();
-        }
-        EditorGUILayout.Space();
+        // TODO Add package function
+        // GUILayout.Label("Add new package", EditorStyles.boldLabel);
+        // packageUrl = EditorGUILayout.TextField("Git url", packageUrl);
+        // if (GUILayout.Button("Add package from url"))
+        // {
+        //     this.AddPackageFromUrl();
+        // }
+        // EditorGUILayout.Space();
 
-
-        autoCheckUpdate = EditorGUILayout.Toggle("Automatic check update", autoCheckUpdate);
-        if (!autoCheckUpdate)
+        if (GUILayout.Button("Check packages and updates"))
         {
-            if (GUILayout.Button("Check packages and updates"))
-            {
-                this.GetListOfPackages();
-            }
+            this.GetListOfPackages();
         }
+
         EditorGUILayout.Space();
 
         GUILayout.Label("Packages list", EditorStyles.boldLabel);

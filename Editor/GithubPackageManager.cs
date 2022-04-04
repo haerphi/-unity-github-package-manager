@@ -47,7 +47,6 @@ public class GithubPackageManager : EditorWindow
 
     void Reset()
     {
-        UnityEngine.Debug.Log("RESET!");
         EventSubscribingExample_RegisteringPackages();
         packageUrl = "https://";
         packageListStatus = "Fetch first please";
@@ -142,7 +141,6 @@ public class GithubPackageManager : EditorWindow
             gitTokenField = "";
             GUI.FocusControl(null);
         }
-        // TODO manage error later
     }
 
     void AddPackageFromUrl()
@@ -169,6 +167,10 @@ public class GithubPackageManager : EditorWindow
         else
         {
             gp.GoToVersion();
+
+            // mark the package as new and not to remove
+            gp.isNewPackage = true;
+
             // save package in json file
             SaveGithubDepenciesToJson();
 
@@ -354,29 +356,26 @@ public class GithubPackageManager : EditorWindow
 
     void RegisteringPackagesEventHandler(PackageRegistrationEventArgs packageRegistrationEventArgs)
     {
-        UnityEngine.Debug.Log("RegisteringPackagesEventHandler");
         foreach (var removedPackage in packageRegistrationEventArgs.removed)
         {
-            UnityEngine.Debug.Log($"Removing {removedPackage.name}");
             int removeIndex = -1;
             for (int i = 0; i < githubDependencies.Count; i++)
             {
-                UnityEngine.Debug.Log(removedPackage.name + " == " + githubDependencies[i].name);
-                if (removedPackage.name == githubDependencies[i].name)
+                // search after the package with the removePackage name and remove it if it is not a new package
+                if (removedPackage.name == githubDependencies[i].name && !githubDependencies[i].isNewPackage)
                 {
                     removeIndex = i;
                     break;
+                }
+                else
+                {
+                    githubDependencies[i].isNewPackage = false;
                 }
             }
             if (removeIndex > -1)
             {
                 githubDependencies.RemoveAt(removeIndex);
             }
-        }
-        UnityEngine.Debug.Log("Cleaned list");
-        foreach (GithubPackage gp in githubDependencies)
-        {
-            UnityEngine.Debug.Log(gp.name);
         }
         SaveGithubDepenciesToJson();
     }

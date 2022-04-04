@@ -15,6 +15,8 @@ public class GithubPackage
     public string onRelease = null;
     public bool isInstalled = false;
 
+    public bool isNewPackage = false;
+
     public GithubPackage(string _name, string _packageId, string _path = null, string _onRelease = null)
     {
         name = _name;
@@ -127,11 +129,21 @@ public class GithubPackage
 
     override public string ToString()
     {
-        return "{"
+        string result = "{"
         + "\"packageId\":\"" + packageId + "\","
         + "\"name\":\"" + name + "\","
-        + "\"onRelease\":\"" + onRelease + "\""
-        + "}";
+        + "\"onRelease\":\"" + onRelease + "\"";
+
+
+        if (isNewPackage)
+        {
+            result += "," + "\"isNewPackage\":\"" + isNewPackage + "\"";
+
+        }
+
+        result += "}";
+
+        return result;
     }
 }
 

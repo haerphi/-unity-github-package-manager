@@ -1,6 +1,6 @@
 {
   "name": "com.haerphi.com.haerphi.githubpackagemanager",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "displayName": "Github package manager",
   "description": "This is a little manager to help you with your github packages",
   "unity": "2020.3",
